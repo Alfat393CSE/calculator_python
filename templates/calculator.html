@@ -1,81 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .calculator {
-            max-width: 400px;
-            margin: 100px auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-        }
-        .screen {
-            background: #222;
-            color: #0f0;
-            font-size: 1.5rem;
-            height: 60px;
-            border-radius: 10px;
-            text-align: right;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-        button {
-            font-size: 1.2rem !important;
-            border-radius: 10px !important;
-        }
-        .btn-operator {
-            background: #ff9800;
-            color: white;
-        }
-        .btn-operator:hover {
-            background: #e68900;
-        }
-        .btn-equal {
-            background: #4caf50;
-            color: white;
-        }
-        .btn-equal:hover {
-            background: #3d8b40;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #141e30, #243b55);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .calculator {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0px 8px 30px rgba(0,0,0,0.4);
+    }
+    .screen {
+      background: #000;
+      color: #0f0;
+      font-size: 1.6rem;
+      height: 70px;
+      border-radius: 10px;
+      text-align: right;
+      padding: 15px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+    button {
+      font-size: 1.1rem !important;
+      border-radius: 12px !important;
+      font-weight: 500;
+    }
+    .btn-func { background: #17a2b8; color: #fff; }
+    .btn-operator { background: #ff9800; color: #fff; }
+    .btn-equal { background: #4caf50; color: #fff; }
+    .btn-clear { background: #dc3545; color: #fff; }
+    .btn-bracket { background: #6f42c1; color: #fff; }
+    .btn-func:hover { background: #138496; }
+    .btn-operator:hover { background: #e68900; }
+    .btn-equal:hover { background: #3d8b40; }
+    .btn-clear:hover { background: #bd2130; }
+    .btn-bracket:hover { background: #59359c; }
+  </style>
 </head>
 <body>
-    <div class="calculator">
-        <form method="POST">
-            <div class="screen">
-                {{ expression }} {% if result is not none %}= {{ result }}{% endif %}
-            </div>
-            <div class="row g-2">
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}1" class="btn btn-light w-100">1</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}2" class="btn btn-light w-100">2</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}3" class="btn btn-light w-100">3</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}+" class="btn btn-operator w-100">+</button></div>
-                
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}4" class="btn btn-light w-100">4</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}5" class="btn btn-light w-100">5</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}6" class="btn btn-light w-100">6</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}-" class="btn btn-operator w-100">-</button></div>
-                
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}7" class="btn btn-light w-100">7</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}8" class="btn btn-light w-100">8</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}9" class="btn btn-light w-100">9</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}*" class="btn btn-operator w-100">&times;</button></div>
-                
-                <div class="col-3"><button type="submit" name="expression" value="" class="btn btn-danger w-100">C</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}0" class="btn btn-light w-100">0</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}/" class="btn btn-operator w-100">&divide;</button></div>
-                <div class="col-3"><button type="submit" name="expression" value="{{ expression }}" class="btn btn-equal w-100">=</button></div>
-            </div>
-        </form>
-    </div>
+  <div class="calculator">
+    <form method="POST">
+      <div class="screen">
+        {{ expression }} {% if result is not none %}= {{ result }}{% endif %}
+      </div>
+
+      <div class="row g-2">
+        <!-- Functions -->
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}sqrt(" class="btn btn-func w-100">√</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}sin(" class="btn btn-func w-100">sin</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}cos(" class="btn btn-func w-100">cos</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}tan(" class="btn btn-func w-100">tan</button></div>
+
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}log(" class="btn btn-func w-100">log</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}pi" class="btn btn-func w-100">π</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}e" class="btn btn-func w-100">e</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}**" class="btn btn-func w-100">^</button></div>
+
+        <!-- Brackets -->
+        <div class="col-6"><button type="submit" name="expression" value="{{ expression }}(" class="btn btn-bracket w-100">(</button></div>
+        <div class="col-6"><button type="submit" name="expression" value="{{ expression }})" class="btn btn-bracket w-100">)</button></div>
+
+        <!-- Digits & operators -->
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}7" class="btn btn-light w-100">7</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}8" class="btn btn-light w-100">8</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}9" class="btn btn-light w-100">9</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}/" class="btn btn-operator w-100">÷</button></div>
+
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}4" class="btn btn-light w-100">4</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}5" class="btn btn-light w-100">5</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}6" class="btn btn-light w-100">6</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}*" class="btn btn-operator w-100">×</button></div>
+
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}1" class="btn btn-light w-100">1</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}2" class="btn btn-light w-100">2</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}3" class="btn btn-light w-100">3</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}-" class="btn btn-operator w-100">-</button></div>
+
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}0" class="btn btn-light w-100">0</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}." class="btn btn-light w-100">.</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}+" class="btn btn-operator w-100">+</button></div>
+        <div class="col-3"><button type="submit" name="expression" value="{{ expression }}" class="btn btn-equal w-100">=</button></div>
+
+        <!-- Clear -->
+        <div class="col-12"><button type="submit" name="expression" value="" class="btn btn-clear w-100">C</button></div>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

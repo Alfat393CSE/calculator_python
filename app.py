@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import math
 
 app = Flask(__name__)
 
@@ -10,8 +11,17 @@ def calculator():
     if request.method == "POST":
         expression = request.form.get("expression")
         try:
-            # Safely evaluate only arithmetic expressions
-            result = eval(expression, {"__builtins__": None}, {})
+            # allow safe math functions
+            allowed = {
+                "sqrt": math.sqrt,
+                "sin": math.sin,
+                "cos": math.cos,
+                "tan": math.tan,
+                "log": math.log,
+                "pi": math.pi,
+                "e": math.e
+            }
+            result = eval(expression, {"__builtins__": None}, allowed)
         except Exception:
             result = "Error"
 
